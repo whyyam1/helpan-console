@@ -1,0 +1,58 @@
+{
+  "name": "@kmv/helpan-console",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Helpan Console — the KMV platform's user-facing agent-consent surface, delivered as a shared React Native library (Helpan AI rail, sprint H-8 foundation + Console UI components).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "source": "src/index.ts",
+  "react-native": "src/index.ts",
+  "files": [
+    "src",
+    "lib",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "build": "bob build",
+    "prepare": "bob build"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "exclude": "**/*.{test,spec}.{ts,tsx}",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.74.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "react": "^18.3.1",
+    "react-native": "^0.76.5",
+    "react-native-builder-bob": "^0.30.3",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}
