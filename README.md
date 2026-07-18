@@ -12,7 +12,7 @@ Sprint **H-8** of the Helpan AI rail. Spec: `helpan-ai-console-specification-v1.
 
 ## Status
 
-**v0.2.0 — Slices 1 + 2 + 3 complete.** UI layer feature-complete; awaiting embedding-app integration smoke + manual VoiceOver/TalkBack pass.
+**v0.2.1 — Slices 1 + 2 + 3 complete.** UI layer feature-complete; awaiting embedding-app integration smoke + manual VoiceOver/TalkBack pass. (`0.2.1` is a packaging-only release over `0.2.0` — prebuilt `lib/` committed for fast git-install; no source change.)
 
 | Phase | Contents | State |
 |---|---|---|
@@ -31,7 +31,7 @@ Sprint **H-8** of the Helpan AI rail. Spec: `helpan-ai-console-specification-v1.
 Distributed as a **git-installable package** — no private registry required. Pin the release tag:
 
 ```bash
-npm install github:whyyam1/helpan-console#v0.2.0
+npm install github:whyyam1/helpan-console#v0.2.1
 ```
 
 or in your app's `package.json`:
@@ -39,16 +39,16 @@ or in your app's `package.json`:
 ```jsonc
 {
   "dependencies": {
-    "@kmv/helpan-console": "github:whyyam1/helpan-console#v0.2.0"
+    "@kmv/helpan-console": "github:whyyam1/helpan-console#v0.2.1"
   }
 }
 ```
 
-On install, npm runs the package's `prepare` step (`bob build`), which produces the `lib/` CommonJS + ESM + TypeScript outputs. React Native apps consume `src/` directly through Metro (via the `react-native` / `source` fields); the built `lib/` backs type resolution and any non-Metro tooling (Jest, Node).
+The `lib/` CommonJS + ESM + TypeScript outputs are **prebuilt and committed to the tag**, so the install is fast — npm copies the package without pulling the build toolchain (`react-native-builder-bob`) or any devDependencies. React Native apps consume `src/` directly through Metro (via the `react-native` / `source` fields); the built `lib/` backs type resolution and any non-Metro tooling (Jest, Node).
 
-**Peer dependencies** (provided by your app): `react` ≥ 18, `react-native` ≥ 0.74.
+**Peer dependencies** (provided by your app): `react` ≥ 18, `react-native` ≥ 0.74. The package declares **no runtime `dependencies`**, so a consumer install adds nothing transitive.
 
-> Private-repo variant: if the GitHub repo is kept private, install over SSH — `npm install git+ssh://git@github.com:whyyam1/helpan-console.git#v0.2.0` — with a deploy key or `~/.gitconfig` credential on the installing machine/CI.
+> Private-repo variant: if the GitHub repo is kept private, install over SSH — `npm install git+ssh://git@github.com:whyyam1/helpan-console.git#v0.2.1` — with a deploy key or `~/.gitconfig` credential on the installing machine/CI.
 
 ---
 
@@ -171,7 +171,7 @@ npm run lint          # eslint
 npm run format        # prettier write
 ```
 
-> `build` also runs automatically as the `prepare` lifecycle step (on `npm install` and when the package is installed as a git dependency).
+> `build` also runs automatically as the `prepack` lifecycle step (before `npm pack` / `npm publish`) so a produced tarball is always freshly built. It does **not** run on a consumer's git-install — that uses the committed `lib/`. **When changing source, run `npm run build` and commit the updated `lib/` before tagging a release**, or the git-install will ship stale output.
 
 ---
 

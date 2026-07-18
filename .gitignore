@@ -3,7 +3,9 @@ node_modules/
 .pnpm-store/
 
 # build output
-lib/
+# NOTE: lib/ is intentionally COMMITTED — the package is distributed by
+# git-install, so the prebuilt output must be in the tree (no build on the
+# consumer). Rebuild with `npm run build` and commit before tagging a release.
 *.tsbuildinfo
 
 # env / secrets
