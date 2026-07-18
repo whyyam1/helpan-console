@@ -1,6 +1,6 @@
 {
   "name": "@kmv/helpan-console",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "description": "Helpan Console — the KMV platform's user-facing agent-consent surface, delivered as a shared React Native library (Helpan AI rail, sprint H-8 foundation + Console UI components).",
   "license": "UNLICENSED",
@@ -24,8 +24,7 @@
     "test:watch": "vitest",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "build": "bob build",
-    "prepack": "bob build"
+    "build": "bob build"
   },
   "react-native-builder-bob": {
     "source": "src",

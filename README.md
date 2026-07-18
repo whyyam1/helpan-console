@@ -12,7 +12,7 @@ Sprint **H-8** of the Helpan AI rail. Spec: `helpan-ai-console-specification-v1.
 
 ## Status
 
-**v0.2.1 — Slices 1 + 2 + 3 complete.** UI layer feature-complete; awaiting embedding-app integration smoke + manual VoiceOver/TalkBack pass. (`0.2.1` is a packaging-only release over `0.2.0` — prebuilt `lib/` committed for fast git-install; no source change.)
+**v0.2.2 — Slices 1 + 2 + 3 complete.** UI layer feature-complete; awaiting embedding-app integration smoke + manual VoiceOver/TalkBack pass. (`0.2.2` is a packaging-only release over `0.2.0` — prebuilt `lib/` committed and **no `prepare`/`prepack` lifecycle**, so a git-install copies the package with zero build and zero devDependencies; no source change.)
 
 | Phase | Contents | State |
 |---|---|---|
@@ -31,7 +31,7 @@ Sprint **H-8** of the Helpan AI rail. Spec: `helpan-ai-console-specification-v1.
 Distributed as a **git-installable package** — no private registry required. Pin the release tag:
 
 ```bash
-npm install github:whyyam1/helpan-console#v0.2.1
+npm install github:whyyam1/helpan-console#v0.2.2
 ```
 
 or in your app's `package.json`:
@@ -39,16 +39,16 @@ or in your app's `package.json`:
 ```jsonc
 {
   "dependencies": {
-    "@kmv/helpan-console": "github:whyyam1/helpan-console#v0.2.1"
+    "@kmv/helpan-console": "github:whyyam1/helpan-console#v0.2.2"
   }
 }
 ```
 
-The `lib/` CommonJS + ESM + TypeScript outputs are **prebuilt and committed to the tag**, so the install is fast — npm copies the package without pulling the build toolchain (`react-native-builder-bob`) or any devDependencies. React Native apps consume `src/` directly through Metro (via the `react-native` / `source` fields); the built `lib/` backs type resolution and any non-Metro tooling (Jest, Node).
+The `lib/` CommonJS + ESM + TypeScript outputs are **prebuilt and committed to the tag**, and the package has **no `prepare`/`prepack` script** — both of those run on a git-install and would drag in the build toolchain. Without them, npm just copies the committed package: no `react-native-builder-bob`, no devDependencies, no build. React Native apps consume `src/` directly through Metro (via the `react-native` / `source` fields); the built `lib/` backs type resolution and any non-Metro tooling (Jest, Node).
 
 **Peer dependencies** (provided by your app): `react` ≥ 18, `react-native` ≥ 0.74. The package declares **no runtime `dependencies`**, so a consumer install adds nothing transitive.
 
-> Private-repo variant: if the GitHub repo is kept private, install over SSH — `npm install git+ssh://git@github.com:whyyam1/helpan-console.git#v0.2.1` — with a deploy key or `~/.gitconfig` credential on the installing machine/CI.
+> Private-repo variant: if the GitHub repo is kept private, install over SSH — `npm install git+ssh://git@github.com:whyyam1/helpan-console.git#v0.2.2` — with a deploy key or `~/.gitconfig` credential on the installing machine/CI.
 
 ---
 
@@ -171,7 +171,7 @@ npm run lint          # eslint
 npm run format        # prettier write
 ```
 
-> `build` also runs automatically as the `prepack` lifecycle step (before `npm pack` / `npm publish`) so a produced tarball is always freshly built. It does **not** run on a consumer's git-install — that uses the committed `lib/`. **When changing source, run `npm run build` and commit the updated `lib/` before tagging a release**, or the git-install will ship stale output.
+> There is **deliberately no `prepare`/`prepack` lifecycle hook** — both run on a git-install and would pull the whole build toolchain into the consumer. `build` is manual. **When you change source, run `npm run build` and commit the updated `lib/` before tagging a release**, or the git-install ships stale output. (`git status` will show `lib/` diffs, since it is a committed artifact.)
 
 ---
 
