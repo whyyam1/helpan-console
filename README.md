@@ -12,7 +12,7 @@ Sprint **H-8** of the Helpan AI rail. Spec: `helpan-ai-console-specification-v1.
 
 ## Status
 
-**v0.2.2 — Slices 1 + 2 + 3 complete.** UI layer feature-complete; awaiting embedding-app integration smoke + manual VoiceOver/TalkBack pass. (`0.2.2` is a packaging-only release over `0.2.0` — prebuilt `lib/` committed and **no `prepare`/`prepack` lifecycle**, so a git-install copies the package with zero build and zero devDependencies; no source change.)
+**v0.2.3 — Slices 1 + 2 + 3 complete.** UI layer feature-complete; awaiting embedding-app integration smoke + manual VoiceOver/TalkBack pass. `0.2.3` changes the default `baseUrl` to the live rail host `https://helpanai-production.up.railway.app` (`api.helpan.co.ke` has no DNS yet). (`0.2.2` was a packaging-only release over `0.2.0` — prebuilt `lib/` committed and **no `prepare`/`prepack` lifecycle**, so a git-install copies the package with zero build and zero devDependencies; no source change.)
 
 | Phase | Contents | State |
 |---|---|---|
@@ -31,7 +31,7 @@ Sprint **H-8** of the Helpan AI rail. Spec: `helpan-ai-console-specification-v1.
 Distributed as a **git-installable package** — no private registry required. Pin the release tag:
 
 ```bash
-npm install github:whyyam1/helpan-console#v0.2.2
+npm install github:whyyam1/helpan-console#v0.2.3
 ```
 
 or in your app's `package.json`:
@@ -39,7 +39,7 @@ or in your app's `package.json`:
 ```jsonc
 {
   "dependencies": {
-    "@kmv/helpan-console": "github:whyyam1/helpan-console#v0.2.2"
+    "@kmv/helpan-console": "github:whyyam1/helpan-console#v0.2.3"
   }
 }
 ```
@@ -48,7 +48,7 @@ The `lib/` CommonJS + ESM + TypeScript outputs are **prebuilt and committed to t
 
 **Peer dependencies** (provided by your app): `react` ≥ 18, `react-native` ≥ 0.74. The package declares **no runtime `dependencies`**, so a consumer install adds nothing transitive.
 
-> Private-repo variant: if the GitHub repo is kept private, install over SSH — `npm install git+ssh://git@github.com:whyyam1/helpan-console.git#v0.2.2` — with a deploy key or `~/.gitconfig` credential on the installing machine/CI.
+> Private-repo variant: if the GitHub repo is kept private, install over SSH — `npm install git+ssh://git@github.com:whyyam1/helpan-console.git#v0.2.3` — with a deploy key or `~/.gitconfig` credential on the installing machine/CI.
 
 ---
 
@@ -69,7 +69,7 @@ function MyAppSettings() {
         <HelpanConsole
           customerToken={identitiCustomerToken}        // from your auth context
           appId="lunchdrop"                            // your literal app slug
-          baseUrl="https://api.helpan.co.ke"           // optional; production default
+          baseUrl="https://helpanai-production.up.railway.app" // optional; this is the default
           theme={{
             primary: '#0D5C4E',
             accent:  '#C47A1A',

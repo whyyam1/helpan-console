@@ -35,7 +35,7 @@ export class ConsoleApiError extends Error {
 }
 
 export interface ConsoleApiConfig {
-  /** Rail base URL, e.g. `https://api.helpan.co.ke` (no trailing slash). */
+  /** Rail base URL, e.g. `https://helpanai-production.up.railway.app` (no trailing slash). */
   readonly baseUrl: string;
   /** Identiti customer JWT. */
   readonly customerToken: string;

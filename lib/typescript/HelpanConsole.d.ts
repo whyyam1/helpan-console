@@ -16,7 +16,7 @@
  *   <HelpanConsole
  *     customerToken="<Identiti customer JWT>"
  *     appId="lunchdrop"
- *     baseUrl="https://api.helpan.co.ke"
+ *     baseUrl="https://helpanai-production.up.railway.app"
  *     theme={{ primary: '#0D5C4E' }}
  *     lang="en"
  *     onClose={() => navigateBack()}

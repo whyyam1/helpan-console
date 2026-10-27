@@ -16,7 +16,7 @@
  *   <HelpanConsole
  *     customerToken="<Identiti customer JWT>"
  *     appId="lunchdrop"
- *     baseUrl="https://api.helpan.co.ke"
+ *     baseUrl="https://helpanai-production.up.railway.app"
  *     theme={{ primary: '#0D5C4E' }}
  *     lang="en"
  *     onClose={() => navigateBack()}
@@ -66,7 +66,9 @@ export interface HelpanConsoleProps {
   readonly subscribeConnectivity?: (cb: (offline: boolean) => void) => () => void;
 }
 
-const DEFAULT_BASE_URL = 'https://api.helpan.co.ke';
+// Live rail host. `api.helpan.co.ke` is the JWT audience string only (no DNS
+// yet) — switch this default once that domain is cut over.
+const DEFAULT_BASE_URL = 'https://helpanai-production.up.railway.app';
 
 type Screen =
   | { kind: 'tabs' }
