@@ -157,7 +157,7 @@ The Console authenticates to the Helpan AI rail with the **Identiti customer JWT
 
 Two surfaces are built against rail endpoints that aren't always live:
 - **Activity tab** → `GET /v1/actions` — delivered by rail sprint H-4 (✅ live).
-- **Grant flow** → `POST /v1/authorities` issuance — needs Identiti to seed Helpan AI's internal-signing tenant credential AND pre-register the `helpan.authorities.issue` operation_kind. Until that lands, the Grant flow renders correctly but submission 503s.
+- **Grant flow** → `POST /v1/authorities` issuance. ✅ Identiti wiring landed 2026-07-20: internal-sign tenant `helpan_ai_internal` provisioned, DA kid `helpan-da-2026-q2`, and the step-up operation-kind registered as **`helpan_ai.authority_issuance`** (audience `helpan_authority_issuance`). The embedding app must request the customer token with `requested_audience=https://api.helpan.co.ke` and initiate step-up with `operation_kind=helpan_ai.authority_issuance` (the old `helpan.authorities.issue` is unregistered → `400 OPERATION_KIND_UNKNOWN`).
 
 ---
 
